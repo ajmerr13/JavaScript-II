@@ -23,10 +23,11 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
   // To test our solution, we can use the given `items` array and a variety of callbacks.
   // Note how callbacks can be declared separately, or inlined.
 
-  // TEST 1 (inlined callback):
+  // TEST 1 (inlined callback)
 
   const test1 = firstItem(items, item => `I love my ${item}!`);
   console.log(test1); // "I love my Pencil!"
+
 
   // TEST 2 (declaring callback before hand):
 
@@ -38,27 +39,58 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
   console.log(test2); // "this Pencil is worth a million dollars!"
 */
 
+const getLength = function(arr, cb){
+  cb(arr.length);
+};
 
-function getLength(arr, cb) {
-  // getLength passes the length of the array into the callback.
-}
+getLength(items, length => {
+  console.log(`The length of the array is ${length}.`);
+});
 
-function last(arr, cb) {
+
+
+const last = (arr, cb) => {
+  cb(arr.slice(-1)[0]);
+};
   // last passes the last item of the array into the callback.
-}
+last(items, lastItem => {
+  console.log(`The last item is ${lastItem}`);
+});
 
-function sumNums(x, y, cb) {
-  // sumNums adds two numbers (x, y) and passes the result to the callback.
-}
 
-function multiplyNums(x, y, cb) {
+const sumNums = (x, y, cb) => {
+  cb(x + y);
+}
+// sumNums adds two numbers (x, y) and passes the result to the callback.
+sumNums(2, 3, sum  => {
+  console.log(`the sum is ${sum}`)
+});
+
+const multiplyNums = (x, y, cb) => {
+  cb(x * y);
   // multiplyNums multiplies two numbers and passes the result to the callback.
 }
+multiplyNums(2, 3, product => {
+  console.log(`the product is ${product}`)
+});
 
-function contains(item, list, cb) {
+
   // contains checks if an item is present inside of the given array/list.
   // Pass true to the callback if it is, otherwise pass false.
-}
+const contains = (arr, str, cb) => {
+  const isInArray = () => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === str) {
+        return true;
+      }
+    } return false;
+  };
+  cb(isInArray());
+};
+contains (items, 'Gum', result => {
+  console.log(`it is ${result}`)
+});
+
 
 /* STRETCH PROBLEM */
 
